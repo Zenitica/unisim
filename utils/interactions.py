@@ -1,11 +1,9 @@
-from physical_quantity import *
+from physical_quantity import G
+from objects import UniverseObject
 
 
-class Interation:
-    def __init__(self, object1, object2):
-        self.object1 = object1
-        self.object2 = object2
-        self.force = None
-
-    def apply_force(self):
-        pass
+def calculate_gravity_force(obj1, obj2):
+    delta_displacement = obj2.displacement.vector_subtract(obj1.displacement)
+    dist = delta_displacement.vector_l2_norm()
+    force_magnitude = G * obj1.mass * obj2.mass / dist
+    return force_magnitude
