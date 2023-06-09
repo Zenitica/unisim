@@ -49,8 +49,16 @@ class Canvas:
             obj.update(self.sim_frequency)
 
 
+# initialize canvas
 canvas = Canvas()
+
+# load scenario
 canvas.load_canvas_from_scenario(EarthMoonDoublePlanet())
+
+# # override default configuations
+# canvas.set_display_frequency(_DISPLAY_FRENQUENCY)
+# canvas.set_sim_frequency(_SIM_FREQUENCY)
+# canvas.set_time_speed(_TIME_SPEED)
 
 while True:
     time.sleep(1. / canvas.display_frenquency)
