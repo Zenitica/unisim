@@ -1,5 +1,5 @@
-from utils.physical_quantity import Vector, Force, Displacement, Velocity, Acceleration
 from utils.constants import G
+from utils.physical_quantity import Vector, Force, Displacement, Velocity, Acceleration
 
 
 class UniverseObject:
@@ -40,5 +40,3 @@ class UniverseObject:
         self.displacement = self.displacement.vector_add(self.velocity.vector_mul_by_scalar(delta_t))
         # print(self.name, self.displacement.x, self.displacement.y)
         self.force = None
-
-

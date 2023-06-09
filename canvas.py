@@ -1,8 +1,9 @@
 import time
 
+from utils.constants import G
 from utils.objects import UniverseObject
 from utils.physical_quantity import Vector, Force, Displacement, Velocity, Acceleration
-from utils.constants import G
+
 from config import _DISPLAY_FRENQUENCY, _SIM_FREQUENCY, _TIME_SPEED
 
 
@@ -35,7 +36,6 @@ class Canvas:
             obj.update(self.sim_frequency)
 
 
-
 canvas = Canvas()
 canvas.set_sim_frequency(_SIM_FREQUENCY)
 canvas.set_display_frequency(_DISPLAY_FRENQUENCY)
@@ -49,6 +49,7 @@ canvas.add_object(UniverseObject(name="Moon",
                                  radius=1737.4 * 1e3,
                                  displacement=Displacement(384400 * 1e3, 0),
                                  velocity=Velocity(0, 1.022 * 1e3)))
+
 while True:
     time.sleep(1. / canvas.display_frenquency)
     for obj in canvas.objects:
