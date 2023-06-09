@@ -2,7 +2,8 @@ import time
 
 from utils.constants import G
 from utils.objects import UniverseObject
-from utils.physical_quantity import Vector, Force, Displacement, Velocity, Acceleration
+from utils.interactions import Interaction
+from utils.physical_quantities import Vector, Force, Displacement, Velocity, Acceleration
 
 from config import _DISPLAY_FRENQUENCY, _SIM_FREQUENCY, _TIME_SPEED
 
@@ -24,11 +25,12 @@ class Canvas:
 
     def calculate_combined_forces(self):
         for obj in self.objects:
+            
             # gravity
             for other in self.objects:
                 if obj != other:
-                    obj.apply_gravity_force_upon_self(other)
-            # print(obj.name, obj.force.x, obj.force.y)
+                    g = Interaction.get_gravity_force_upon_former(obj, other)
+                    obj.apply_force_upon_self(g)
 
     def update_canvas(self):
         assert self.sim_frequency is not None, "Simulation frequency not set."
