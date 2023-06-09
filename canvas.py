@@ -3,6 +3,7 @@ import time
 from utils.constants import G
 from utils.objects import UniverseObject
 from utils.interactions import Interaction
+from saves.default_scenarios.earth_moon import EarthMoonDoublePlanet
 from utils.physical_quantities import Vector, Force, Displacement, Velocity, Acceleration
 
 from config import _DISPLAY_FRENQUENCY, _SIM_FREQUENCY, _TIME_SPEED
@@ -13,19 +14,29 @@ class Canvas:
         self.objects = []
         self.sim_frequency = None
         self.display_frenquency = None
+        self.time_speed = None
+
+    def load_canvas_from_scenario(self, scenario):
+        self.objects = scenario.objects
+        self.sim_frequency = scenario.default_sim_frequency
+        self.display_frenquency = scenario.default_display_frenquency
+        self.time_speed = scenario.default_time_speed
 
     def set_sim_frequency(self, freq):
         self.sim_frequency = freq
 
     def set_display_frequency(self, freq):
         self.display_frenquency = freq
+
+    def set_time_speed(self, t_speed):
+        self.time_speed = t_speed
     
     def add_object(self, obj):
         self.objects.append(obj)
 
     def calculate_combined_forces(self):
         for obj in self.objects:
-            
+
             # gravity
             for other in self.objects:
                 if obj != other:
@@ -39,23 +50,12 @@ class Canvas:
 
 
 canvas = Canvas()
-canvas.set_sim_frequency(_SIM_FREQUENCY)
-canvas.set_display_frequency(_DISPLAY_FRENQUENCY)
-canvas.add_object(UniverseObject(name="Earth",
-                                 mass=5.97e24, 
-                                 radius=6371 * 1e3, 
-                                 displacement=Displacement(0, 0), 
-                                 velocity=Velocity(0, 0)))
-canvas.add_object(UniverseObject(name="Moon",
-                                 mass=7.34e22,
-                                 radius=1737.4 * 1e3,
-                                 displacement=Displacement(384400 * 1e3, 0),
-                                 velocity=Velocity(0, 1.022 * 1e3)))
+canvas.load_canvas_from_scenario(EarthMoonDoublePlanet())
 
 while True:
     time.sleep(1. / canvas.display_frenquency)
     for obj in canvas.objects:
         print(obj.display())
-    for i in range(int(_TIME_SPEED * canvas.sim_frequency / canvas.display_frenquency)):
+    for i in range(int(canvas.time_speed * canvas.sim_frequency / canvas.display_frenquency)):
         canvas.calculate_combined_forces()
         canvas.update_canvas()

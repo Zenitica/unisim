@@ -1,4 +1,8 @@
-_DISPLAY_FRENQUENCY = 1
-_SIM_FREQUENCY = 60
+# recommended: 1
+_DISPLAY_FRENQUENCY = None
 
-_TIME_SPEED = 1
+# recommended: 60
+_SIM_FREQUENCY = None
+
+# recommended: 1
+_TIME_SPEED = None
