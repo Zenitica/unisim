@@ -22,12 +22,18 @@ class Vector:
         x = self.x / scalar
         y = self.y / scalar
         return Vector(x, y)
-
-    def vector_dot_product(self, other):
-        return self.x * other.x + self.y * other.y
     
     def vector_norm_l2(self):
         return (self.x ** 2 + self.y ** 2) ** 0.5
+    
+    @staticmethod
+    def vector_dot_product(a, b):
+        return a.x * b.x + a.y * b.y
+    
+    @staticmethod
+    def vector_dist_l2(a, b):
+        return (a-b).vector_norm_l2()
+
     
     
 class Force(Vector):

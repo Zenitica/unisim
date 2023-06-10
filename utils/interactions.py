@@ -12,3 +12,8 @@ class Interaction:
         force_x = force_magnitude * delta_displacement.x / dist
         force_y = force_magnitude * delta_displacement.y / dist
         return Force(force_x, force_y)
+    
+    @staticmethod
+    def detect_if_collided(a, b):
+        dist = Vector.vector_dist_l2(a.displacement, b.displacement)
+        return dist <= a.radius + b.radius

@@ -1,5 +1,5 @@
 # recommended: 1
-_DISPLAY_FRENQUENCY = 5
+_DISPLAY_FRENQUENCY = 1
 
 # recommended: 60
 _SIM_FREQUENCY = 0.1
